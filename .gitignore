@@ -3,6 +3,9 @@
 # temp
 .moodlicious/
 
+# nextra
+_pagefind/
+
 # dependencies
 /node_modules
 /.pnp
