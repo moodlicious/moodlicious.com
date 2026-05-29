@@ -10,7 +10,12 @@ export const metadata: Metadata = {
     title: { default: "Moodlicious", template: "%s | Moodlicious" },
 };
 
-const navbar = <Navbar logo={<b>Moodlicious</b>} />;
+const navbar = (
+    <Navbar
+        logo={<b>Moodlicious</b>}
+        projectLink="https://github.com/moodlicious"
+    />
+);
 const footer = <Footer>{new Date().getFullYear()} © Moodlicious.</Footer>;
 
 export default async function RootLayout({
