@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
+import nextra from "nextra";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+    /* config options here */
 };
 
-export default nextConfig;
+// Set up Nextra with its configuration
+const withNextra = nextra({
+    search: false,
+});
+
+// Export the final Next.js config with Nextra included
+export default withNextra(nextConfig);
