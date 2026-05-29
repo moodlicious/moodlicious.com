@@ -6,7 +6,9 @@ const nextConfig: NextConfig = {
 };
 
 // Set up Nextra with its configuration
-const withNextra = nextra({});
+const withNextra = nextra({
+    contentDirBasePath: "/docs",
+});
 
 // Export the final Next.js config with Nextra included
 export default withNextra(nextConfig);

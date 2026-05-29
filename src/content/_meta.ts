@@ -1,8 +1,3 @@
 import { Meta } from "nextra";
 
-export default {
-    index: {
-        type: "page",
-        display: "hidden",
-    },
-} satisfies Meta;
+export default {} satisfies Meta;

@@ -12,7 +12,7 @@ const Page = () => {
                     {"'"}t hurt... right?
                 </p>
 
-                <Link href="/plugins">Explore Plugins</Link>
+                <Link href="/docs/plugins">Explore Plugins</Link>
             </header>
         </div>
     );

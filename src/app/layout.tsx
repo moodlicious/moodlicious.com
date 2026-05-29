@@ -29,7 +29,7 @@ export default async function RootLayout({
             <body>
                 <Layout
                     navbar={navbar}
-                    pageMap={await getPageMap()}
+                    pageMap={await getPageMap("/docs")}
                     footer={footer}
                     feedback={{ content: null }}
                     editLink={null}
