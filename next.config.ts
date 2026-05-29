@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 import nextra from "nextra";
 
 const nextConfig: NextConfig = {
-    /* config options here */
+    output: "export",
 };
 
 // Set up Nextra with its configuration
