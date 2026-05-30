@@ -41,6 +41,9 @@ jobs:
             - name: Install dependencies
               run: bun install
 
+            - name: Fetch plugin docs into Nextra content directory
+              run: bun run fetch-plugin-docs
+
             - name: Setup Pages
               id: setup_pages
               uses: actions/configure-pages@v5
