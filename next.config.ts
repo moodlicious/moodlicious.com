@@ -3,6 +3,9 @@ import nextra from "nextra";
 
 const nextConfig: NextConfig = {
     output: "export",
+    images: {
+        unoptimized: true,
+    },
 };
 
 // Set up Nextra with its configuration
