@@ -1,7 +1,15 @@
 #!/usr/bin/env bun
 
 import dedent from "dedent";
-import { mkdir, readdir, rename, rm, stat, writeFile } from "node:fs/promises";
+import {
+    mkdir,
+    readdir,
+    readFile,
+    rename,
+    rm,
+    stat,
+    writeFile,
+} from "node:fs/promises";
 import { join } from "node:path";
 import { simpleGit } from "simple-git";
 import { z } from "zod";
@@ -97,4 +105,36 @@ for (const plugin of plugins) {
     }
 
     await rename(pluginDocsDir, join(DOCS_DIR, component));
+}
+
+// Add frontmatter.
+for (const plugin of plugins) {
+    const frontmatter = dedent`
+        ---
+        asIndexPage: true
+        ---
+    `;
+    const targetDocsDir = join(
+        DOCS_DIR,
+        plugin.custom_properties["moodle-plugin"]!,
+    );
+    const indexPage = join(targetDocsDir, "index.md");
+
+    const exists = await stat(indexPage)
+        .then((s) => s.isFile())
+        .catch(() => false);
+    if (!exists) {
+        continue;
+    }
+
+    const currentContent = await readFile(indexPage, "utf-8");
+    if (currentContent.startsWith("---")) {
+        console.info(`${indexPage} already has frontmatter, skipping.`);
+        continue;
+    }
+
+    const content = [frontmatter, currentContent].join("\n\n");
+
+    await writeFile(indexPage, content, "utf8");
+    console.info(`${indexPage} frontmatter successfully injected.`);
 }
