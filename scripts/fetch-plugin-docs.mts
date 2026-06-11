@@ -49,6 +49,8 @@ const plugins = await fetch(API_URL, {
         plugins.filter((p) => p.custom_properties["moodle-plugin"]),
     );
 
+console.info(`Found ${plugins.length} plugins.`);
+
 const PLUGINS_DIR = ".moodlicious/plugins";
 const DOCS_DIR = "src/content/plugins";
 
@@ -66,6 +68,8 @@ await readdir(DOCS_DIR).then(async (items) => {
     }
 });
 
+console.log("Cloning plugin docs");
+
 await mkdir(PLUGINS_DIR, { recursive: true });
 
 for (const plugin of plugins) {
@@ -82,6 +86,8 @@ for (const plugin of plugins) {
     ]);
     await simpleGit(clonePath).raw(["sparse-checkout", "set", "docs"]);
 
+    console.info(`Cloned ${plugin.name}`);
+
     const pluginDocsDir = join(clonePath, "docs");
     const targetDocsDir = join(DOCS_DIR, component);
 
@@ -89,6 +95,10 @@ for (const plugin of plugins) {
         .then((s) => s.isDirectory())
         .catch(() => false);
     if (!exists) {
+        console.warn(
+            `${plugin.name} does not have /docs directory yet, skipping by using not available template.`,
+        );
+
         // If the plugin has no documentation yet, then just create a simple markdown file.
         await mkdir(targetDocsDir, { recursive: true });
         const markdown = dedent`
@@ -101,11 +111,17 @@ for (const plugin of plugins) {
 
         await writeFile(join(targetDocsDir, "index.md"), markdown, "utf8");
 
+        console.info(
+            `${plugin.name} docs not available template successfully installed.`,
+        );
         continue;
     }
 
     await rename(pluginDocsDir, join(DOCS_DIR, component));
+    console.info(`${plugin.name} docs successfully installed.`);
 }
+
+console.log("Injecting frontmatter metadata");
 
 // Add frontmatter.
 for (const plugin of plugins) {
