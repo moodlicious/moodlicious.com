@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind",
-    "fetch-plugin-docs": "./scripts/fetch-plugin-docs.sh"
+    "fetch-plugin-docs": "./scripts/fetch-plugin-docs.mts"
   },
   "dependencies": {
     "next": "16.2.6",
@@ -22,11 +22,14 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dedent": "^1.7.2",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "pagefind": "^1.5.2",
+    "simple-git": "^3.36.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "zod": "^4.3.6"
   },
   "overrides": {
     "zod": "4.3.6"
