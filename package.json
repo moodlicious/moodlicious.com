@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind",
+    "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind",
     "fetch-plugin-docs": "./scripts/fetch-plugin-docs.mts"
   },
   "dependencies": {
