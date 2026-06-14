@@ -63,7 +63,7 @@ for (const plugin of plugins) {
         .catch(() => false);
     if (!exists) {
         console.warn(
-            `${plugin.name} does not have /docs directory yet, skipping by using not available template.`,
+            `${plugin.name} does not have /docs directory yet, skipping by using not available template.`
         );
 
         await mkdir(targetDocsDir, { recursive: true });
@@ -78,7 +78,7 @@ for (const plugin of plugins) {
         await writeFile(join(targetDocsDir, "index.md"), markdown, "utf8");
 
         console.info(
-            `${plugin.name} docs not available template successfully installed.`,
+            `${plugin.name} docs not available template successfully installed.`
         );
         continue;
     }
@@ -97,7 +97,7 @@ for (const plugin of plugins) {
     `;
     const targetDocsDir = join(
         DOCS_DIR,
-        plugin.custom_properties["moodle-plugin"]!,
+        plugin.custom_properties["moodle-plugin"]!
     );
     const indexPage = join(targetDocsDir, "index.md");
 

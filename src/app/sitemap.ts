@@ -22,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 const pageItemToSitemapItems = (
     item: PageMapItem,
-    depth: number = 0,
+    depth: number = 0
 ): MetadataRoute.Sitemap => {
     if ("data" in item) {
         return [];
@@ -30,7 +30,7 @@ const pageItemToSitemapItems = (
 
     if ("children" in item) {
         return item.children.flatMap((page) =>
-            pageItemToSitemapItems(page, depth + 1),
+            pageItemToSitemapItems(page, depth + 1)
         );
     }
 
