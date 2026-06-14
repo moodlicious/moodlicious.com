@@ -29,6 +29,9 @@ jobs:
             - name: Fetch plugin docs
               run: bun run fetch-plugin-docs
 
+            - name: Check formatting
+              run: bun run format:check
+
             - name: Lint
               run: bun run lint
 
