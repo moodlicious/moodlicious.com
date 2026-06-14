@@ -1,45 +1,49 @@
 {
-  "name": "moodlicious.com",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbo",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
-    "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind",
-    "fetch-plugin-docs": "./scripts/fetch-plugin-docs.mts"
-  },
-  "dependencies": {
-    "next": "16.2.6",
-    "nextra": "^4.6.1",
-    "nextra-theme-docs": "^4.6.1",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "dedent": "^1.7.2",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.6",
-    "pagefind": "^1.5.2",
-    "simple-git": "^3.36.0",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "zod": "^4.3.6"
-  },
-  "overrides": {
-    "zod": "4.3.6"
-  },
-  "ignoreScripts": [
-    "sharp",
-    "unrs-resolver"
-  ],
-  "trustedDependencies": [
-    "sharp",
-    "unrs-resolver"
-  ]
+    "name": "moodlicious.com",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev --turbo",
+        "build": "next build",
+        "start": "next start",
+        "lint": "eslint",
+        "format:check": "prettier --check .",
+        "format:write": "prettier --write .",
+        "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind",
+        "fetch-plugin-docs": "./scripts/fetch-plugin-docs.mts"
+    },
+    "dependencies": {
+        "next": "16.2.6",
+        "nextra": "^4.6.1",
+        "nextra-theme-docs": "^4.6.1",
+        "react": "19.2.4",
+        "react-dom": "19.2.4"
+    },
+    "devDependencies": {
+        "@tailwindcss/postcss": "^4",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "dedent": "^1.7.2",
+        "eslint": "^9",
+        "eslint-config-next": "16.2.6",
+        "pagefind": "^1.5.2",
+        "prettier": "^3.8.4",
+        "prettier-plugin-tailwindcss": "^0.8.0",
+        "simple-git": "^3.36.0",
+        "tailwindcss": "^4",
+        "typescript": "^5",
+        "zod": "^4.3.6"
+    },
+    "overrides": {
+        "zod": "4.3.6"
+    },
+    "ignoreScripts": [
+        "sharp",
+        "unrs-resolver"
+    ],
+    "trustedDependencies": [
+        "sharp",
+        "unrs-resolver"
+    ]
 }
