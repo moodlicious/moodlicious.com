@@ -12,42 +12,9 @@ import {
 } from "node:fs/promises";
 import { join } from "node:path";
 import { simpleGit } from "simple-git";
-import { z } from "zod";
+import { fetchPlugins, type PluginRepo } from "../src/lib/plugins.js";
 
-const repoSchema = z.object({
-    id: z.number(),
-    name: z.string(),
-    description: z.string().nullish(),
-    full_name: z.string(),
-    clone_url: z.string(),
-    custom_properties: z.object({
-        "moodle-plugin": z.string().nullish(),
-    }),
-});
-const reposSchema = z.array(repoSchema);
-
-const API_URL = new URL(
-    "https://api.github.com/orgs/moodlicious/repos?type=public&sort=full_name&per_page=100",
-);
-API_URL.searchParams.set("type", "public");
-API_URL.searchParams.set("sort", "full_name");
-API_URL.searchParams.set("per_page", "100");
-
-const plugins = await fetch(API_URL, {
-    headers: {
-        accept: "application/vnd.github+json",
-    },
-})
-    .then((res) => {
-        if (!res.ok) {
-            throw new Error("Fetch not ok.");
-        }
-        return res.json();
-    })
-    .then((plugins) => reposSchema.parseAsync(plugins))
-    .then((plugins) =>
-        plugins.filter((p) => p.custom_properties["moodle-plugin"]),
-    );
+const plugins: PluginRepo[] = await fetchPlugins();
 
 console.info(`Found ${plugins.length} plugins.`);
 
@@ -99,7 +66,6 @@ for (const plugin of plugins) {
             `${plugin.name} does not have /docs directory yet, skipping by using not available template.`,
         );
 
-        // If the plugin has no documentation yet, then just create a simple markdown file.
         await mkdir(targetDocsDir, { recursive: true });
         const markdown = dedent`
             # ${component}
@@ -123,7 +89,6 @@ for (const plugin of plugins) {
 
 console.log("Injecting frontmatter metadata");
 
-// Add frontmatter.
 for (const plugin of plugins) {
     const frontmatter = dedent`
         ---
